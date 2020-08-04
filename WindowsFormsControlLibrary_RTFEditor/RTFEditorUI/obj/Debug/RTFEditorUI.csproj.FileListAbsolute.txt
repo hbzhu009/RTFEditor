@@ -1,0 +1,12 @@
+C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\bin\Debug\RTFEditorUI.dll
+C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\bin\Debug\RTFEditorUI.pdb
+C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.csproj.GenerateResource.Cache
+C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.dll
+C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.pdb
+C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.RTFEditor.resources
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\bin\Debug\RTFEditorUI.dll
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\bin\Debug\RTFEditorUI.pdb
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.RTFEditor.resources
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.csproj.GenerateResource.Cache
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.dll
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.pdb
