@@ -16,10 +16,30 @@ namespace WF_IntegrateRTFEditor
         {
             InitializeComponent();
             rtfEditor1.RTFpath = @"C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\Figures\temp.rtf";
-            rtfEditor1.LoadFromRTF_Click(new object(), new EventArgs());
+            rtfEditor1.LoadFromRTF();           
+            
+            //richTextBox2.Rtf = curRTBContent;
+            
+        }
 
+        private void Save_Click(object sender, EventArgs e)
+        {
+            rtfEditor1.userName = "CognexAdministrator";
+            rtfEditor1.strVersion = "3.1.5.0";
+            rtfEditor1.SaveToRTF();
+        }
+
+        private void Load_Click(object sender, EventArgs e)
+        {
+            rtfEditor1.RTFpath = @"C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\Figures\temp.rtf";
+            rtfEditor1.LoadFromRTF();
+        }
+
+        private void Reload_Click(object sender, EventArgs e)
+        {
             string curRTBContent = rtfEditor1.getRichTextBoxContent();
-            richTextBox1.Rtf = curRTBContent;
+            rtfEditor1.richTextBox.Clear();
+            rtfEditor1.richTextBox.Rtf = curRTBContent;
         }
     }
 }

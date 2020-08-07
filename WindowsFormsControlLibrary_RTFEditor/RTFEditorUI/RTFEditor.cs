@@ -14,21 +14,22 @@ namespace RTFEditorUI
     public partial class RTFEditor: UserControl
     {
         public string RTFpath;
-
+        public string strVersion = "x.x.x.x";
+        public string userName = "xMan";
         //public string rtfText;
         
         public RTFEditor()
         {
             InitializeComponent();
 
-            richTextBox1.AllowDrop = true;
+            richTextBox.AllowDrop = true;
 
-            richTextBox1.DragDrop += RichTextBox1_DragDrop;
-            richTextBox1.DragEnter += RichTextBox1_DragEnter;
+            richTextBox.DragDrop += RichTextBox1_DragDrop;
+            richTextBox.DragEnter += RichTextBox1_DragEnter;
             //richTextBox1.MouseDown += RichTextBox1_MouseDown;
 
-            richTextBox1.Multiline = true;
-            richTextBox1.WordWrap = false;
+            richTextBox.Multiline = true;
+            richTextBox.WordWrap = false;
             
             
             
@@ -45,7 +46,7 @@ namespace RTFEditorUI
         //get the content from the first richtextbox
         public string getRichTextBoxContent()
         {
-            return richTextBox1.Rtf;
+            return richTextBox.Rtf;
         }
 
 
@@ -73,8 +74,8 @@ namespace RTFEditorUI
             Clipboard.SetDataObject(bmp);
             DataFormats.Format dataFormat =
             DataFormats.GetFormat(DataFormats.Bitmap);
-            if (richTextBox1.CanPaste(dataFormat))
-                richTextBox1.Paste(dataFormat);
+            if (richTextBox.CanPaste(dataFormat))
+                richTextBox.Paste(dataFormat);
         }
 
 
@@ -90,8 +91,8 @@ namespace RTFEditorUI
                     //if (confirmRes == DialogResult.Yes)
                     {
                         DataFormats.Format dataFormat = DataFormats.GetFormat(DataFormats.Bitmap);
-                        if (richTextBox1.CanPaste(dataFormat))
-                            richTextBox1.Paste(dataFormat);
+                        if (richTextBox.CanPaste(dataFormat))
+                            richTextBox.Paste(dataFormat);
 
                         //clear the clip board after paste
                         Clipboard.Clear();
@@ -107,27 +108,27 @@ namespace RTFEditorUI
 
 
 
-        private void SaveToRTF_Click(object sender, EventArgs e)
+        public void SaveToRTF()
         {
             //string RTFpath = @"C:\Work\Programming\C#\WindowsFormsApplication_ObtainImageFromClipBoard\Figures\temp.rtf";            
             //string test = richTextBox1.Text.Trim();
 
-            if (!richTextBox1.Text.Trim().EndsWith(AddMark().Substring(0, AddMark().Length / 2)))//new change item added, sometimes only update some old items.
+            if (!richTextBox.Text.Trim().EndsWith(AddMark().Substring(0, AddMark().Length / 2)))//new change item added, sometimes only update some old items.
             {
-                richTextBox1.AppendText(appendInfo());
+                richTextBox.AppendText(appendInfo());
             }
 
             //there might be some text copied from script or other source
             //so before save, format all the text to default font.
             clearFormat();
-            richTextBox1.SaveFile(RTFpath);
+            richTextBox.SaveFile(RTFpath);
 
 
         }
 
-        public void LoadFromRTF_Click(object sender, EventArgs e)
+        public void LoadFromRTF()
         {
-            richTextBox1.LoadFile(RTFpath);
+            richTextBox.LoadFile(RTFpath);
             clearFormat();
         }
 
@@ -142,12 +143,12 @@ namespace RTFEditorUI
         {
             //add date and operation
             string strTime = DateTime.Now.ToString("yyyy-MM-dd / HH:mm:ss");
-            string userName = "xMan";
+            
 
             int spaceNum = 30;
             string space = new string(' ', spaceNum);
 
-            return "\n" + space + strTime + "  " + userName + "\n" + AddMark() + "\n";
+            return "\n" + space + strTime + "  " + "Version: "+strVersion + "  by "+userName + "\n" + AddMark() + "\n";
 
         }
 
@@ -176,7 +177,7 @@ namespace RTFEditorUI
         private void searchTxt(string txtWord)
         {
             //string txtWord = "CatchMe";
-            int index = richTextBox1.Text.IndexOf(txtWord);
+            int index = richTextBox.Text.IndexOf(txtWord);
             //richTextBox1.Cursor = Cursors.
 
             //MessageBox.Show("I'm at " + index.ToString());
@@ -185,13 +186,13 @@ namespace RTFEditorUI
             clearFormat();
 
             List<int> resultIndexList = new List<int>();
-            for (int i = 0; i < richTextBox1.TextLength; i++)
+            for (int i = 0; i < richTextBox.TextLength; i++)
             {
-                int resultIndex = richTextBox1.Find(txtWord.Trim(), i, RichTextBoxFinds.None);
+                int resultIndex = richTextBox.Find(txtWord.Trim(), i, RichTextBoxFinds.None);
                 if (resultIndex != -1)
                 {
-                    richTextBox1.SelectionColor = Color.Red;
-                    richTextBox1.SelectionBackColor = Color.Yellow;
+                    richTextBox.SelectionColor = Color.Red;
+                    richTextBox.SelectionBackColor = Color.Yellow;
 
                     if (resultIndexList.Count == 0)
                         resultIndexList.Add(resultIndex);
@@ -207,7 +208,7 @@ namespace RTFEditorUI
 
             int count = 0;
             char[] splitter = { ' ', '\n' };
-            string[] strArr = richTextBox1.Text.Split(splitter);
+            string[] strArr = richTextBox.Text.Split(splitter);
             //int test = richTextBox1.Text.Split(splitter).Length;
 
             for (int i = 0; i < strArr.Length; i++)
@@ -230,11 +231,11 @@ namespace RTFEditorUI
         //clear the format
         private void clearFormat()
         {
-            richTextBox1.SelectAll();
-            richTextBox1.SelectionColor = Color.Black;
-            richTextBox1.SelectionBackColor = Color.White;
+            richTextBox.SelectAll();
+            richTextBox.SelectionColor = Color.Black;
+            richTextBox.SelectionBackColor = Color.White;
             Font defaultFont = new Font("Microsoft YaHei", 12); ;
-            richTextBox1.SelectionFont = defaultFont;
+            richTextBox.SelectionFont = defaultFont;
         }
 
         //text change function
@@ -275,21 +276,8 @@ namespace RTFEditorUI
                 PasteImage();
             }
 
-        }
+        }      
 
-        private void Results_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void totalResult_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
