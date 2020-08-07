@@ -14,6 +14,9 @@ namespace RTFEditorUI
     public partial class RTFEditor: UserControl
     {
         public string RTFpath;
+
+        //public string rtfText;
+        
         public RTFEditor()
         {
             InitializeComponent();
@@ -26,8 +29,9 @@ namespace RTFEditorUI
 
             richTextBox1.Multiline = true;
             richTextBox1.WordWrap = false;
-
-
+            
+            
+            
             //setup the file folder under the application
             //DirectoryInfo RootFolder = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             //RTFpath = RootFolder.Parent.Parent.Parent.FullName + "\\Figures\\temp.rtf";
@@ -36,6 +40,12 @@ namespace RTFEditorUI
             //Manual input
             //RTFpath = @"C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\Figures\temp.rtf";
 
+        }      
+
+        //get the content from the first richtextbox
+        public string getRichTextBoxContent()
+        {
+            return richTextBox1.Rtf;
         }
 
 
@@ -267,6 +277,19 @@ namespace RTFEditorUI
 
         }
 
-        
+        private void Results_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void totalResult_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -16,7 +16,10 @@ namespace WF_IntegrateRTFEditor
         {
             InitializeComponent();
             rtfEditor1.RTFpath = @"C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\Figures\temp.rtf";
-            rtfEditor1.LoadFromRTF_Click(new object(), new EventArgs());   
+            rtfEditor1.LoadFromRTF_Click(new object(), new EventArgs());
+
+            string curRTBContent = rtfEditor1.getRichTextBoxContent();
+            richTextBox1.Rtf = curRTBContent;
         }
     }
 }

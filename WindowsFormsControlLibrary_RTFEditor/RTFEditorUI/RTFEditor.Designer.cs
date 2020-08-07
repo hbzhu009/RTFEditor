@@ -52,7 +52,7 @@
             // 
             // RestoreFormat
             // 
-            this.RestoreFormat.Location = new System.Drawing.Point(725, 610);
+            this.RestoreFormat.Location = new System.Drawing.Point(735, 547);
             this.RestoreFormat.Name = "RestoreFormat";
             this.RestoreFormat.Size = new System.Drawing.Size(91, 23);
             this.RestoreFormat.TabIndex = 24;
@@ -64,30 +64,33 @@
             // 
             this.Results.AutoSize = true;
             this.Results.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Results.Location = new System.Drawing.Point(858, 72);
+            this.Results.Location = new System.Drawing.Point(812, 72);
             this.Results.Name = "Results";
             this.Results.Size = new System.Drawing.Size(52, 19);
             this.Results.TabIndex = 23;
             this.Results.Text = "Results";
+            this.Results.Click += new System.EventHandler(this.Results_Click);
             // 
             // totalResult
             // 
             this.totalResult.AutoSize = true;
             this.totalResult.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalResult.Location = new System.Drawing.Point(819, 72);
+            this.totalResult.Location = new System.Drawing.Point(776, 72);
             this.totalResult.Name = "totalResult";
             this.totalResult.Size = new System.Drawing.Size(0, 19);
             this.totalResult.TabIndex = 22;
+            this.totalResult.Click += new System.EventHandler(this.totalResult_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(731, 72);
+            this.label2.Location = new System.Drawing.Point(731, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 19);
             this.label2.TabIndex = 21;
             this.label2.Text = "search";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // SearchTextBox
             // 
@@ -99,7 +102,7 @@
             // 
             // LaunchRTF
             // 
-            this.LaunchRTF.Location = new System.Drawing.Point(559, -2);
+            this.LaunchRTF.Location = new System.Drawing.Point(564, 5);
             this.LaunchRTF.Name = "LaunchRTF";
             this.LaunchRTF.Size = new System.Drawing.Size(82, 38);
             this.LaunchRTF.TabIndex = 19;
@@ -119,7 +122,7 @@
             // 
             // SaveToRTF
             // 
-            this.SaveToRTF.Location = new System.Drawing.Point(291, 13);
+            this.SaveToRTF.Location = new System.Drawing.Point(328, 13);
             this.SaveToRTF.Name = "SaveToRTF";
             this.SaveToRTF.Size = new System.Drawing.Size(75, 23);
             this.SaveToRTF.TabIndex = 17;
@@ -130,9 +133,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(11, 42);
+            this.richTextBox1.Location = new System.Drawing.Point(11, 46);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(695, 591);
+            this.richTextBox1.Size = new System.Drawing.Size(695, 524);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -152,7 +155,7 @@
             this.Controls.Add(this.SaveToRTF);
             this.Controls.Add(this.richTextBox1);
             this.Name = "RTFEditor";
-            this.Size = new System.Drawing.Size(922, 647);
+            this.Size = new System.Drawing.Size(876, 582);
             this.ResumeLayout(false);
             this.PerformLayout();
 

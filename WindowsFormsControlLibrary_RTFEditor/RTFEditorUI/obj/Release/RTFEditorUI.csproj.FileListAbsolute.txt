@@ -4,3 +4,9 @@ C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\ob
 C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.dll
 C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.pdb
 C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.RTFEditor.resources
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\bin\Release\RTFEditorUI.dll
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\bin\Release\RTFEditorUI.pdb
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.RTFEditor.resources
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.csproj.GenerateResource.Cache
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.dll
+C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Release\RTFEditorUI.pdb
