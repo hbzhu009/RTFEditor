@@ -11,13 +11,18 @@ using System.IO;
 
 namespace RTFEditorUI
 {
-    public partial class RTFEditor: UserControl
+    public partial class RTFEditor : UserControl
     {
-        public string RTFpath;
+        private string RTFpath;
         public string strVersion = "x.x.x.x";
         public string userName = "xMan";
-        //public string rtfText;
-        
+        public string rtfOriginContent = string.Empty;
+
+        public void setRTFPath(string sourceFilePath)
+        {
+            RTFpath = sourceFilePath;
+
+        }
         public RTFEditor()
         {
             InitializeComponent();
@@ -30,9 +35,9 @@ namespace RTFEditorUI
 
             richTextBox.Multiline = true;
             richTextBox.WordWrap = false;
-            
-            
-            
+
+
+
             //setup the file folder under the application
             //DirectoryInfo RootFolder = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             //RTFpath = RootFolder.Parent.Parent.Parent.FullName + "\\Figures\\temp.rtf";
@@ -41,7 +46,7 @@ namespace RTFEditorUI
             //Manual input
             //RTFpath = @"C:\Work\MachineVision\Github\WindowsFormsControlLibrary_RTFEditor\Figures\temp.rtf";
 
-        }      
+        }
 
         //get the content from the first richtextbox
         public string getRichTextBoxContent()
@@ -106,16 +111,26 @@ namespace RTFEditorUI
             }
         }
 
+        //Append txt to the file
+        public void AppendText(string strNewText)
+        {
+            richTextBox.AppendText(strNewText);
+
+        }
 
 
-        public void SaveToRTF()
+        //save to RTF file, save with signing
+        public void SaveToRTF(bool withSignature)
         {
             //string RTFpath = @"C:\Work\Programming\C#\WindowsFormsApplication_ObtainImageFromClipBoard\Figures\temp.rtf";            
             //string test = richTextBox1.Text.Trim();
 
-            if (!richTextBox.Text.Trim().EndsWith(AddMark().Substring(0, AddMark().Length / 2)))//new change item added, sometimes only update some old items.
+            if (withSignature)
             {
-                richTextBox.AppendText(appendInfo());
+                if (!richTextBox.Text.Trim().EndsWith(AddMark().Substring(0, AddMark().Length / 2)))//new change item added, sometimes only update some old items.
+                {
+                    richTextBox.AppendText(appendInfo());
+                }
             }
 
             //there might be some text copied from script or other source
@@ -123,14 +138,30 @@ namespace RTFEditorUI
             clearFormat();
             richTextBox.SaveFile(RTFpath);
 
+            //After saved successfully, update the rtfOriginContent. 
+            //won't release this function, so comment it.
+            //rtfOriginContent = richTextBox.Rtf;
 
         }
+
+     
+
 
         public void LoadFromRTF()
         {
             richTextBox.LoadFile(RTFpath);
             clearFormat();
+
+            //save the content temporarily
+            rtfOriginContent = richTextBox.Rtf;
         }
+
+        //check whether the content status, is modified or not
+        public bool isModified()
+        {
+            return string.Equals(rtfOriginContent, richTextBox.Rtf) ? false : true;
+        }
+
 
         private void LaunchRTF_Click(object sender, EventArgs e)
         {
@@ -143,16 +174,15 @@ namespace RTFEditorUI
         {
             //add date and operation
             string strTime = DateTime.Now.ToString("yyyy-MM-dd / HH:mm:ss");
-            
+
 
             int spaceNum = 30;
             string space = new string(' ', spaceNum);
 
-            return "\n" + space + strTime + "  " + "Version: "+strVersion + "  by "+userName + "\n" + AddMark() + "\n";
+            return "\n" + space + strTime + "  " + "Version: " + strVersion + "  by " + userName + "\n" + AddMark() + "\n";
 
         }
-
-
+        
         //add mark as starter
         private string AddMark()
         {
@@ -176,55 +206,67 @@ namespace RTFEditorUI
         //search specified text
         private void searchTxt(string txtWord)
         {
-            //string txtWord = "CatchMe";
-            int index = richTextBox.Text.IndexOf(txtWord);
-            //richTextBox1.Cursor = Cursors.
-
-            //MessageBox.Show("I'm at " + index.ToString());
-
-            //clear previous format
             clearFormat();
-
-            List<int> resultIndexList = new List<int>();
-            for (int i = 0; i < richTextBox.TextLength; i++)
+            if (SearchTextBox.Text == "")
             {
-                int resultIndex = richTextBox.Find(txtWord.Trim(), i, RichTextBoxFinds.None);
-                if (resultIndex != -1)
-                {
-                    richTextBox.SelectionColor = Color.Red;
-                    richTextBox.SelectionBackColor = Color.Yellow;
+                totalResult.Text = "0";
+            }
+            else
+            {
+                //string txtWord = "CatchMe";
+                int index = richTextBox.Text.IndexOf(txtWord);
+                //richTextBox1.Cursor = Cursors.
 
-                    if (resultIndexList.Count == 0)
-                        resultIndexList.Add(resultIndex);
-                    else
+                //MessageBox.Show("I'm at " + index.ToString());
+
+                //clear previous format
+
+
+                List<int> resultIndexList = new List<int>();
+                for (int i = 0; i < richTextBox.TextLength; i++)
+                {
+                    int resultIndex = richTextBox.Find(txtWord.Trim(), i, RichTextBoxFinds.None);
+                    if (resultIndex != -1)
                     {
-                        if (resultIndex != resultIndexList[resultIndexList.Count - 1])
+                        richTextBox.SelectionColor = Color.Red;
+                        richTextBox.SelectionBackColor = Color.Yellow;
+
+                        if (resultIndexList.Count == 0)
                             resultIndexList.Add(resultIndex);
+                        else
+                        {
+                            if (resultIndex != resultIndexList[resultIndexList.Count - 1])
+                                resultIndexList.Add(resultIndex);
+                        }
                     }
                 }
-            }
 
-            totalResult.Text = resultIndexList.Count.ToString();
+                totalResult.Text = resultIndexList.Count.ToString();
 
-            int count = 0;
-            char[] splitter = { ' ', '\n' };
-            string[] strArr = richTextBox.Text.Split(splitter);
-            //int test = richTextBox1.Text.Split(splitter).Length;
+                //locate the cursor in the first existence
+                int firstIndex = resultIndexList[0];
+                richTextBox.Select(firstIndex, 0);
+                richTextBox.Focus();
+                /*
+                int count = 0;
+                char[] splitter = { ' ', '\n' };
+                string[] strArr = richTextBox.Text.Split(splitter);
+                //int test = richTextBox1.Text.Split(splitter).Length;
 
-            for (int i = 0; i < strArr.Length; i++)
-            {
-                //string test2 = richTextBox1.Text.Split(' ')[i];
-
-                if (strArr[i].Trim().ToLower() == txtWord.Trim().ToLower())
+                for (int i = 0; i < strArr.Length; i++)
                 {
-                    count = count + 1;
-                }
+                    //string test2 = richTextBox1.Text.Split(' ')[i];
+
+                    if (strArr[i].Trim().ToLower() == txtWord.Trim().ToLower())
+                    {
+                        count = count + 1;
+                    }
+                }*/
+
+
+                //MessageBox.Show(count.ToString());
+                // lblCount.Text = count.ToString();
             }
-
-
-            //MessageBox.Show(count.ToString());
-            // lblCount.Text = count.ToString();
-
         }
 
 
@@ -234,13 +276,16 @@ namespace RTFEditorUI
             richTextBox.SelectAll();
             richTextBox.SelectionColor = Color.Black;
             richTextBox.SelectionBackColor = Color.White;
-            Font defaultFont = new Font("Microsoft YaHei", 12); ;
+            Font defaultFont = new Font("Microsoft YaHei", 12); 
             richTextBox.SelectionFont = defaultFont;
         }
 
         //text change function
+        //time-consuming, about 500-900 millisecond.
+        /* 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
+            
             if (SearchTextBox.Text == "")
             {
                 totalResult.Text = "0";
@@ -248,10 +293,22 @@ namespace RTFEditorUI
             }
             else
             {
-                searchTxt(SearchTextBox.Text);
+                if ((DateTime.Now - lastRunTime).TotalMilliseconds > IntervalMS)
+                {
+                    //update the lastRunTime
+                    lastRunTime = DateTime.Now;
 
+                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
+
+                    searchTxt(SearchTextBox.Text);
+
+                    sw.Stop();
+                    MessageBox.Show(sw.ElapsedMilliseconds.ToString());
+                }
             }
-        }
+        }*/
+
 
         private void RestoreFormat_Click(object sender, EventArgs e)
         {
@@ -276,8 +333,64 @@ namespace RTFEditorUI
                 PasteImage();
             }
 
-        }      
+        }
 
-        
+        private void btn_ClearSearch_Click(object sender, EventArgs e)
+        {
+            SearchTextBox.Text = "";
+            totalResult.Text = "0";
+            clearFormat();
+        }
+
+        //search text by click the button
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+           
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+
+            searchTxt(SearchTextBox.Text);
+
+            sw.Stop();
+            MessageBox.Show(sw.ElapsedMilliseconds.ToString());
+            //searchTxt(SearchTextBox.Text);
+            
+        }
+
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //event when "Enter" pressed
+        private void enterToSearch(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyValue == 13)
+                searchTxt(SearchTextBox.Text); ;
+
+        }
+
+        //merge the RTF files
+        public void MergeRTFs(List<Tuple<string, List<string>>> srcFileList, string outpuFullName)
+        {
+            RichTextBox mergeRTF = new RichTextBox();
+            mergeRTF.Font = new Font("Microsoft YaHei", 12);
+
+            foreach (Tuple<string, List<string>> eachBranch in srcFileList)
+            {
+                RichTextBox singleRTF = new RichTextBox();
+                foreach (string singleRTFFileName in eachBranch.Item2)
+                {
+                    singleRTF.LoadFile(singleRTFFileName);
+                    mergeRTF.AppendText("\n" + "\n" + "*******" + eachBranch.Item1 + ", " + System.IO.Path.GetFileName(singleRTFFileName) + "*******" + "\n" + "\n");
+                    singleRTF.SelectAll();
+                    mergeRTF.SelectedRtf = singleRTF.SelectedRtf;
+                }
+            }
+            mergeRTF.SaveFile(outpuFullName);
+
+
+        }
+
     }
 }

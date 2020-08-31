@@ -10,4 +10,3 @@ C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFE
 C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.csproj.GenerateResource.Cache
 C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.dll
 C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.pdb
-C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\RTFEditorUI\obj\Debug\RTFEditorUI.csprojResolveAssemblyReference.cache
