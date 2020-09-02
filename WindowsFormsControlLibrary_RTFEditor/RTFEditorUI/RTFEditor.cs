@@ -21,7 +21,7 @@ namespace RTFEditorUI
         public void setRTFPath(string sourceFilePath)
         {
             RTFpath = sourceFilePath;
-
+            
         }
         public RTFEditor()
         {
@@ -199,29 +199,31 @@ namespace RTFEditorUI
 
         }
 
-
-
+        //set search text
+        public void SetSearchText(string txtWord)
+        {
+            SearchTextBox.Text = txtWord;
+        }
 
 
         //search specified text
-        private void searchTxt(string txtWord)
+        public void searchTxt(string txtWord)
         {
-            clearFormat();
-            if (SearchTextBox.Text == "")
+            if (txtWord == "")
             {
                 totalResult.Text = "0";
             }
             else
             {
                 //string txtWord = "CatchMe";
-                int index = richTextBox.Text.IndexOf(txtWord);
+                //int index = richTextBox.Text.IndexOf(txtWord);
                 //richTextBox1.Cursor = Cursors.
 
                 //MessageBox.Show("I'm at " + index.ToString());
 
                 //clear previous format
 
-
+                /*
                 List<int> resultIndexList = new List<int>();
                 for (int i = 0; i < richTextBox.TextLength; i++)
                 {
@@ -239,14 +241,20 @@ namespace RTFEditorUI
                                 resultIndexList.Add(resultIndex);
                         }
                     }
-                }
+                }*/
+
+                //reformat the function.
+                List<int> resultIndexList = searchThenLocate(txtWord);
 
                 totalResult.Text = resultIndexList.Count.ToString();
 
                 //locate the cursor in the first existence
-                int firstIndex = resultIndexList[0];
-                richTextBox.Select(firstIndex, 0);
-                richTextBox.Focus();
+                if (resultIndexList.Count > 0)
+                {
+                    int firstIndex = resultIndexList[0];
+                    richTextBox.Select(firstIndex, 0);
+                    richTextBox.Focus();
+                }
                 /*
                 int count = 0;
                 char[] splitter = { ' ', '\n' };
@@ -263,15 +271,72 @@ namespace RTFEditorUI
                     }
                 }*/
 
-
-                //MessageBox.Show(count.ToString());
-                // lblCount.Text = count.ToString();
+                
             }
         }
 
 
+        //search the specified text
+        public List<int> searchThenLocate(string txtWord)
+        {
+            clearFormat();
+            List<int> resultIndexList = new List<int>();
+
+            for (int i = 0; i < richTextBox.TextLength; i++)
+            {
+                int resultIndex = richTextBox.Find(txtWord.Trim(), i, RichTextBoxFinds.None);
+                if (resultIndex != -1)
+                {
+                    richTextBox.SelectionColor = Color.Red;
+                    richTextBox.SelectionBackColor = Color.Yellow;
+
+                    if (resultIndexList.Count == 0)
+                        resultIndexList.Add(resultIndex);
+                    else
+                    {
+                        if (resultIndex != resultIndexList[resultIndexList.Count - 1])
+                            resultIndexList.Add(resultIndex);
+                    }
+                }
+            }
+            return resultIndexList;
+        }
+
+        //locate the string then replace with a different one
+        public bool replaceText(string oldValue, string updatedValue)
+        {
+            bool bOK = true;
+
+            try
+            {
+                List<int> resultIndexList = searchThenLocate(oldValue);
+
+                //string updatedRTF = richTextBox.Text.Replace(oldValue, updatedValue);
+
+                //richTextBox.Text = updatedRTF;
+                int num = 0;
+                int offset = updatedValue.Length - oldValue.Length;
+                foreach (int index in resultIndexList)
+                {
+                    richTextBox.Select(index + offset * num, oldValue.Length);
+                    richTextBox.SelectedText = updatedValue;
+                    num++; //the count have replaced.
+                }
+            }
+            catch(Exception ex)
+            {
+                bOK = false;
+
+            }
+            //richTextBox.Update();
+
+            return bOK;
+        }
+
+
+
         //clear the format
-        private void clearFormat()
+        public void clearFormat()
         {
             richTextBox.SelectAll();
             richTextBox.SelectionColor = Color.Black;
@@ -337,9 +402,16 @@ namespace RTFEditorUI
 
         private void btn_ClearSearch_Click(object sender, EventArgs e)
         {
+            clearSearch();
+        }
+
+        //clear the search 
+        public void clearSearch()
+        {
             SearchTextBox.Text = "";
             totalResult.Text = "0";
             clearFormat();
+
         }
 
         //search text by click the button
@@ -357,16 +429,12 @@ namespace RTFEditorUI
             
         }
 
-        private void SearchTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         //event when "Enter" pressed
         private void enterToSearch(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.KeyValue == 13)
-                searchTxt(SearchTextBox.Text); ;
+                searchTxt(SearchTextBox.Text); 
 
         }
 
@@ -388,9 +456,8 @@ namespace RTFEditorUI
                 }
             }
             mergeRTF.SaveFile(outpuFullName);
-
-
         }
+
 
     }
 }

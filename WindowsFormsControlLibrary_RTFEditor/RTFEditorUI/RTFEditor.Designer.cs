@@ -64,7 +64,6 @@
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(132, 26);
             this.SearchTextBox.TabIndex = 20;
-            this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             this.SearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.enterToSearch);
             // 
             // richTextBox

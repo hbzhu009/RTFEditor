@@ -74,6 +74,7 @@ namespace WF_IntegrateRTFEditor
             //branch2 RTFs
             List<string> branchList2 = new List<string>();
             branchList2.Add(@"C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\Figures\MergeRTFs\T12_FinalCheck.rtf");
+            branchList2.Add(@"C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\Figures\MergeRTFs\test.rtf");
             srcFileList.Add(new Tuple<string, List<string>>("Branch2", branchList2));
             rtfEditor1.MergeRTFs(srcFileList, @"C:\Work\MachineVision\Github\RTFEditor\WindowsFormsControlLibrary_RTFEditor\Figures\MergeRTFs\Merged.rtf");
 
@@ -89,6 +90,18 @@ namespace WF_IntegrateRTFEditor
         private void button1_Click(object sender, EventArgs e)
         {
             rtfEditor1.SaveToRTF(false);
+        }
+
+        private void ClearSearch_Click(object sender, EventArgs e)
+        {
+            rtfEditor1.clearSearch();
+        }
+
+        private void ReplaceText_Click(object sender, EventArgs e)
+        {
+            string strSourceText = sourceText.Text;
+            rtfEditor1.replaceText(strSourceText, "Test");
+            //rtfEditor1.richTextBox.Text.Replace(strSourceText, "VERSION");
         }
     }
 }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ClearSearch = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_MergeRTF = new System.Windows.Forms.Button();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.CheckDelta = new System.Windows.Forms.Button();
@@ -38,12 +40,16 @@
             this.Load = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.rtfEditor1 = new RTFEditorUI.RTFEditor();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ReplaceText = new System.Windows.Forms.Button();
+            this.sourceText = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.sourceText);
+            this.groupBox1.Controls.Add(this.ReplaceText);
+            this.groupBox1.Controls.Add(this.ClearSearch);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btn_MergeRTF);
             this.groupBox1.Controls.Add(this.StatusLabel);
@@ -55,14 +61,34 @@
             this.groupBox1.Controls.Add(this.Save);
             this.groupBox1.Location = new System.Drawing.Point(908, 107);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(138, 440);
+            this.groupBox1.Size = new System.Drawing.Size(138, 469);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Test func";
             // 
+            // ClearSearch
+            // 
+            this.ClearSearch.Location = new System.Drawing.Point(10, 366);
+            this.ClearSearch.Name = "ClearSearch";
+            this.ClearSearch.Size = new System.Drawing.Size(75, 23);
+            this.ClearSearch.TabIndex = 13;
+            this.ClearSearch.Text = "ClearSerach";
+            this.ClearSearch.UseVisualStyleBackColor = true;
+            this.ClearSearch.Click += new System.EventHandler(this.ClearSearch_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(32, 115);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Save_NoSign";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btn_MergeRTF
             // 
-            this.btn_MergeRTF.Location = new System.Drawing.Point(10, 374);
+            this.btn_MergeRTF.Location = new System.Drawing.Point(6, 313);
             this.btn_MergeRTF.Name = "btn_MergeRTF";
             this.btn_MergeRTF.Size = new System.Drawing.Size(75, 23);
             this.btn_MergeRTF.TabIndex = 11;
@@ -73,7 +99,7 @@
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(7, 320);
+            this.StatusLabel.Location = new System.Drawing.Point(80, 289);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(58, 13);
             this.StatusLabel.TabIndex = 10;
@@ -81,7 +107,7 @@
             // 
             // CheckDelta
             // 
-            this.CheckDelta.Location = new System.Drawing.Point(7, 290);
+            this.CheckDelta.Location = new System.Drawing.Point(6, 284);
             this.CheckDelta.Name = "CheckDelta";
             this.CheckDelta.Size = new System.Drawing.Size(75, 23);
             this.CheckDelta.TabIndex = 9;
@@ -143,15 +169,22 @@
             this.rtfEditor1.Size = new System.Drawing.Size(876, 582);
             this.rtfEditor1.TabIndex = 3;
             // 
-            // button1
+            // ReplaceText
             // 
-            this.button1.Location = new System.Drawing.Point(32, 115);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Save_NoSign";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ReplaceText.Location = new System.Drawing.Point(10, 440);
+            this.ReplaceText.Name = "ReplaceText";
+            this.ReplaceText.Size = new System.Drawing.Size(75, 23);
+            this.ReplaceText.TabIndex = 14;
+            this.ReplaceText.Text = "ReplaceText";
+            this.ReplaceText.UseVisualStyleBackColor = true;
+            this.ReplaceText.Click += new System.EventHandler(this.ReplaceText_Click);
+            // 
+            // sourceText
+            // 
+            this.sourceText.Location = new System.Drawing.Point(10, 414);
+            this.sourceText.Name = "sourceText";
+            this.sourceText.Size = new System.Drawing.Size(100, 20);
+            this.sourceText.TabIndex = 15;
             // 
             // Form1
             // 
@@ -181,6 +214,9 @@
         private System.Windows.Forms.Button CheckDelta;
         private System.Windows.Forms.Button btn_MergeRTF;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ClearSearch;
+        private System.Windows.Forms.Button ReplaceText;
+        private System.Windows.Forms.TextBox sourceText;
     }
 }
 
